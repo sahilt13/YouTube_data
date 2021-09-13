@@ -3,13 +3,15 @@ import requests
 import json
 import googleapiclient.discovery
 
-
+#Class for YouTube data
 class yt_extract:
 
     def __init__(self,api_key,channel_id):
         self.channel_id=channel_id
         self.api_key=api_key
         self.channel_stats=None
+
+    #Method for extracting all channel statistics
 
     def get_data(self):
         url=f'https://www.googleapis.com/youtube/v3/channels?part=statistics&id={self.channel_id}&key={self.api_key}'
@@ -38,6 +40,7 @@ class yt_extract:
         
 
 
+    #Method for extracting list of all the videos from the YouTube channel
 
     def video_list(self, limit=None,start_date=None,end_date=None):
         url=f'https://www.googleapis.com/youtube/v3/search?channelId={self.channel_id}&key={self.api_key}&part=id,snippet&order=date&publishedAfter={start_date}T00%3A00%3A00Z&publishedBefore={end_date}T00%3A00%3A00Z'
@@ -107,6 +110,7 @@ class yt_extract:
         return video_list
 
 
+    # Method for extracting all the stats for Youtube video
 
     def video_data(self,video_key):
         
@@ -175,6 +179,7 @@ class yt_extract:
             
         return st
 
+    #Get all the comments for anly video from YouTube
 
     def get_comments(self,video_key,max_comments):
 
